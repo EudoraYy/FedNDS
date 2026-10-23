@@ -1,0 +1,78 @@
+#config
+#commucation
+use_email: False
+seed: 2025
+device: 0
+model_name: resnet18
+
+# optimizer
+optimizer_name: SGD
+momentum: 0.9
+weight_decay: 5.0e-4
+
+# scheduler
+scheduler_name: None
+milestones: 800
+gamma: 0.1
+
+# pre-train
+is_pre_train: True
+pre_train_epoch: 20
+
+#train
+inferen_batch: 128
+batchsize: 16
+rounds: 1600
+epoch: 1
+numbers: 100
+frc: 0.1
+lr: 0.01
+client_state: dynamic
+probs:
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2
+submodel_rate:
+  - 1
+  - 0.5
+  - 0.25
+  - 0.125
+  - 0.0625
+alpha: 0.0625
+#select_mode: absmax, l2
+select_mode: None
+
+# FIARSE ablations
+fiarse_use_tcbgd: True
+fiarse_aggregation: original  # coverage is an explicitly modified FIARSE ablation
+
+#wandb
+use_wandb: True
+project_name: Rand_Grad
+group_name: L_4
+
+# dataset
+dataset: cifar10
+force_reprocess_dataset: False
+
+#mode: aware
+mode: randGrad
+#mode: roll
+partition_type: patho
+shardperuser: 4
+par_alpha: 0.3
+
+# WikiText2
+bptt: 64
+mask: False
+transformer:
+  embedding_size: 256
+  num_heads: 8
+  hidden_size: 512
+  num_layers: 4
+  dropout: 0.2
+
+
+# python train_classifier.py
