@@ -241,7 +241,8 @@ def compute_image_training_loss(client_model, batch, label_mask, device):
     img, target = batch['img'], batch['label']
     img, target = img.to(device), target.to(device)
     output = client_model(img)
-    output = output.masked_fill(label_mask == 0, 0)
+    if cfg['mode'] != 'fiarse':
+        output = output.masked_fill(label_mask == 0, 0)
     return F.cross_entropy(output, target)
 
 
